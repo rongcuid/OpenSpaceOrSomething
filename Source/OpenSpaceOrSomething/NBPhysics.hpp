@@ -9,10 +9,13 @@
 
 #include <Eigen/Eigen>
 
+#include <boost/numeric/odeint.hpp>
+
 typedef std::vector<Eigen::Vector3d> VectorXs;
 
 struct NBodyCoordinate
 {
+    NBodyCoordinate() {}
     NBodyCoordinate(const std::vector<double> &m) : _m(m)
     {
     }
@@ -42,6 +45,7 @@ struct NBodyCoordinate
 
 struct NBodyMomentum
 {
+    NBodyMomentum(double G) : _G(G) {}
     NBodyMomentum(double G, const std::vector<double> &m) : _G(G), _m(m) {}
 
     /**
@@ -54,13 +58,13 @@ struct NBodyMomentum
         {
             for (int j = 0; j < i; ++j)
             {
-                    const auto xi = q[i];
-                    const auto xj = q[j];
-                    auto x = xj - xi;
-                    double d = x.norm();
-                    auto dqdt = _G * _m[i] * _m[j] * x.normalized() / d/d/d;
-                    dpdt[i] += dqdt;
-                    dpdt[j] -= dqdt;
+                const auto xi = q[i];
+                const auto xj = q[j];
+                auto x = xj - xi;
+                double d = x.norm();
+                auto ddpdt = _G * _m[i] * _m[j] * x.normalized() / d / d / d;
+                dpdt[i] = ddpdt;
+                dpdt[j] = -ddpdt;
             }
         }
     }
@@ -78,23 +82,35 @@ struct NBodyMomentum
 
 class NBodySimulator
 {
-    public:
-    NBodySimulator(double G) {
-        _system = std::make_pair(
+    typedef boost::numeric::odeint::symplectic_rkn_sb3a_mclachlan<VectorXs> integrator;
+
+  public:
+    NBodySimulator(double G) : _system(std::make_pair(
             NBodyCoordinate(std::vector<double>()),
-            NBodyMomentum(G, std::vector<double>()));
+            NBodyMomentum(G, std::vector<double>()))) {
     }
 
-    void do_step() {
-
+    void do_step(double t, double dt) {
+        _rkn.do_step(_system, qp, t, dt);
     }
 
-    void addM(double m) {
+    void addPoint(Eigen::Vector3d q, Eigen::Vector3d p, double m) {
+        // Add coordinate
+        qp.first.push_back(q);
+        // Add momentum
+        qp.second.push_back(p);
+        // Add mass
         _system.first.addM(m);
         _system.second.addM(m);
     }
 
+    const VectorXs& getQs() const {
+        return qp.first; }
+    const VectorXs& getPs() const {
+        return qp.second; }
+
     private:
-    VectorXs p, q;
+    integrator _rkn;
+    std::pair<VectorXs, VectorXs> qp;
     std::pair<NBodyCoordinate, NBodyMomentum> _system;
 };
