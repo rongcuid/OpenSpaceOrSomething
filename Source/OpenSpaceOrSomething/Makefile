@@ -1,7 +1,7 @@
 all: smoketest runsmoke
 
 INCDIR=
-INCDIR+=-I../../ThirdParty/odeint/include
+INCDIR+=-I../../ThirdParty/boost_1_68_0
 INCDIR+=-I../../ThirdParty/eigen
 
 smoketest: smoketest_physics.cpp 

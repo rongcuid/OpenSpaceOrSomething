@@ -1,8 +1,14 @@
 language: cpp
 compiler: gcc
 
+before_install:
+  - sudo apt-get update -qq
+install:
+  - sudo apt-get install -qq cppcheck
+
 script:
   - cd Source/OpenSpaceOrSomething && make
+  - cppcheck --error-exitcode=1 .
 
 branches:
   only:
