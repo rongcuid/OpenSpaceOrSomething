@@ -33,7 +33,7 @@ int main()
     // Pluto
     sim.addPoint(Eigen::Vector3d(-15.5387357, -25.2225594, -3.1902382),
                  Eigen::Vector3d(2.1286538461538464e-11, -1.3130923076923078e-11, -1.0500307692307693e-11),
-                 1.0 / (1.3e8));
+                 7.692307692307693e-09);
 
     const double dt = 100.0;
     const VectorXs &qs = sim.getQs();
@@ -45,6 +45,7 @@ int main()
         if (i != qs.size() - 1)
             std::cout << ",";
     }
+    std::cout << std::endl;
     for (double t = 0.0; t < 200000.0; t = t + dt)
     {
         sim.do_step(t, dt);
