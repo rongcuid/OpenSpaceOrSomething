@@ -1,0 +1,12 @@
+language: cpp
+compiler: gcc
+
+script:
+  - cd Source/OpenSpaceOrSomething && make
+
+branches:
+  only:
+  - master
+
+git:
+  lfs_skip_smudge: true
