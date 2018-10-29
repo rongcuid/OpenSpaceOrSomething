@@ -7,7 +7,7 @@ install:
   - sudo apt-get install -qq cppcheck
 
 script:
-  - cd Source/OpenSpaceOrSomething && make
+  - cd Source/Physics && make
   - cppcheck --error-exitcode=1 .
 
 branches:
