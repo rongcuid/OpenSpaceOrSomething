@@ -14,8 +14,9 @@ public class OpenSpaceOrSomething : ModuleRules
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
- 		PrivateIncludePaths.Add( "../../ThirdParty/eigen" );		
-		PrivateIncludePaths.Add( "../../ThirdParty/odeint/include" );
+ 		PrivateIncludePaths.Add( "../Physics" );	 		
+		//  PrivateIncludePaths.Add( "../../ThirdParty/eigen" );		
+		// PrivateIncludePaths.Add( "../../ThirdParty/boost_1_68_0" );
 		// Uncomment if you are using online features
 		// PrivateDependencyModuleNames.Add("OnlineSubsystem");
 
