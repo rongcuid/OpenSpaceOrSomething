@@ -12,8 +12,8 @@ public class OpenSpaceOrSomething : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
-		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+		//  using Slate UI for the main menu
+		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
  		PrivateIncludePaths.Add( "../Physics" );	 		
 		//  PrivateIncludePaths.Add( "../../ThirdParty/eigen" );		
 		// PrivateIncludePaths.Add( "../../ThirdParty/boost_1_68_0" );
