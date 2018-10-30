@@ -10,7 +10,7 @@
 
 class AOpenSpaceOrSomethingGameModeBase;
 /**
- * main menu widget 
+ * main menu widget to take the planets data
  */
 class OPENSPACEORSOMETHING_API SMainWidget : public SCompoundWidget
 {
@@ -27,6 +27,8 @@ public:
 
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
+
+	//the data's messages
 	void OnMassChanged(const FText& InText);
 	void OnXChanged(const FText& InText);
 	void OnYChanged(const FText& InText);
