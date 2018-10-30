@@ -15,7 +15,10 @@ UCLASS()
 class OPENSPACEORSOMETHING_API UDBWrapper : public UObject
 {
 	GENERATED_BODY()
-	
+
+public:
+	void set_DB(FString db_name);
+	FString DB_Name;
 	
 	
 	

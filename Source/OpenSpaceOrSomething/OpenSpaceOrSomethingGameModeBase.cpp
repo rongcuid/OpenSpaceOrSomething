@@ -4,12 +4,18 @@
 
 class SPlanetNumWidget;
 class SMainWidget;
+class ASpacePlayerController;
 
+//is called when the game starts
 void AOpenSpaceOrSomethingGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
 	planets_num = -1;
 	message = TEXT("HELLO");
+
+
+	//set the ASpaceController class as a default player controller class for this gamemode
+	PlayerControllerClass = ASpacePlayerController::StaticClass();
 
 	StartWidget = SNew(SPlanetNumWidget).messageArg(message).ownerArg(this);
 

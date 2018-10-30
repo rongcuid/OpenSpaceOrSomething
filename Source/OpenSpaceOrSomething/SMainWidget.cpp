@@ -4,6 +4,7 @@
 
 #include "SMainWidget.h"
 #include "SlateOptMacros.h"
+#include <string>
 #include "Runtime/Engine/Classes/Engine/Engine.h"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
@@ -257,24 +258,55 @@ void SMainWidget::Construct(const FArguments& InArgs)
 }
 void SMainWidget::OnMassChanged(const FText & InText)
 {
+
+	FString temp;
+	std::string C_String;
+	FString result;
+	
+	temp = MassInPut->GetText().ToString();
+
+	//convert form a double in c ++ into Fstring in unreal engine
+	// static FString SanitizeFloat( double InFloat );
+	
+	//convet from the Fstring into c++ string
+	// std::string test2 = std::string(TCHAR_TO_UTF8(*test));
+
+	//from std::string into FString
+	//FString(StringC++.c_str())
+
+	C_String = std::string(TCHAR_TO_UTF8(&temp));
+
+	//do the c++ validation
+	//maybe get the error message from the validation
+
+	result = FString(C_String.c_str());
+	
+	
+
 }
 void SMainWidget::OnXChanged(const FText & InText)
 {
+
 }
 void SMainWidget::OnYChanged(const FText & InText)
 {
+
 }
 void SMainWidget::OnZChanged(const FText & InText)
 {
+
 }
 void SMainWidget::OnVelocityXChanged(const FText & InText)
 {
+
 }
 void SMainWidget::OnVelocityYChanged(const FText & InText)
 {
+
 }
 void SMainWidget::OnVelocityZChanged(const FText & InText)
 {
+
 }
 FReply SMainWidget::OnAddClicked()
 {

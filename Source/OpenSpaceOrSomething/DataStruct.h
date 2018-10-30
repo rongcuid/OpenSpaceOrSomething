@@ -7,22 +7,65 @@
 #include "DataStruct.generated.h"
 
 /**
- * struct to keep the data for the game
-	spawn data is an array of structs 
+ * struct to keep the data for the tables in the database
  */
 
 USTRUCT(BlueprintType)
-struct FDataStruct 
+struct FDBTable
 {
 	GENERATED_BODY()
 
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
-	int32 planets_num;
+    FString tabel_name;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
+	int32 planet_id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
+	FString project_name;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
+	int32 mass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
+	int32 x;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
+	int32 y;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
+	int32 z;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
+	int32 Vx;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
+	int32 Vy;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
+	int32 vz;
 
 	//instanciate the array of structs for the planets' data
 
-	FDataStruct(){}
+
+
+};
+
+USTRUCT(BlueprintType)
+struct FDBTableFilds
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
+		TArray<FString> Fields;
+
+	FDBTableFilds()
+	{
+		Fields.Emplace(TEXT("planet_id"));
+		Fields.Emplace(TEXT("x"));
+		Fields.Emplace(TEXT("y"));
+		Fields.Emplace(TEXT("z"));
+		Fields.Emplace(TEXT("Vx"));
+		Fields.Emplace(TEXT("Vy"));
+		Fields.Emplace(TEXT("Vz"));
+		Fields.Emplace(TEXT("project_name"));
+	}
+
 
 };

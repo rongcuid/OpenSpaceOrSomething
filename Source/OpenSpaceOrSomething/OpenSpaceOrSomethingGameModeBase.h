@@ -10,6 +10,7 @@
 #include "SlateBasics.h"
 #include "Runtime/Engine/Classes/Engine/Engine.h"
 #include "Widgets/SWeakWidget.h"
+#include "SpacePlayerController.h"
 #include "OpenSpaceOrSomethingGameModeBase.generated.h"
 
 class SPlanetNumWidget;
@@ -41,6 +42,8 @@ protected:
 	int32 planets_num;
 
 	FString message;
+
+	
 
 	
 };

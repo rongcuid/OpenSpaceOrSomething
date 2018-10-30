@@ -2,6 +2,10 @@
 
 #include "DBWrapper.h"
 
+void UDBWrapper::set_DB(FString name)
+{
+	DB_Name = name;
 
+}
 
 
