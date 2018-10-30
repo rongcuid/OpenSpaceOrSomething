@@ -24,7 +24,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 				.Font(FSlateFontInfo("Verdana", 34))
 				.Text(FText::FromString(prompt))//change to empty later to start with
 			]
-			+ SVerticalBox::Slot()
+			+ SVerticalBox::Slot()//mass
 			.Padding(FMargin(520.0f, 20.0f, 520.0f, 50.0f))
 			[
 					SNew(SBorder).Padding(FMargin(3))
@@ -48,68 +48,171 @@ void SMainWidget::Construct(const FArguments& InArgs)
 								.HintText(FText::FromString("Enter Mass Value Here"))
 								.OnTextChanged(this, &SMainWidget::OnMassChanged)
 							]
-		            ]//border2
+		            ]//border mass
 			]//vertical 2
-			+ SVerticalBox::Slot()
+			+ SVerticalBox::Slot()//x 
 			[
-				SNew(SButton)
-
-				[
-					SNew(STextBlock)
-				]
+					SNew(SBorder).Padding(FMargin(3))
+					.BorderBackgroundColor(FLinearColor::Blue)
+					[
+							SNew(SHorizontalBox)
+							+ SHorizontalBox::Slot()
+							[
+									SNew(STextBlock)
+									.ShadowColorAndOpacity(FLinearColor::Black)
+									.ColorAndOpacity(FLinearColor::Red)
+									.ShadowOffset(FIntPoint(-1, 1))
+									.Font(FSlateFontInfo("Verdana", 34))
+									.Text(FText::FromString(" ENTER coordinate X "))
+							]
+						+ SHorizontalBox::Slot()
+							[
+								SAssignNew(XInPut, SEditableTextBox)
+								.Text(FText::FromString(""))
+								.Font(FSlateFontInfo("Verdana", 34))
+								.HintText(FText::FromString("Enter coordinate X Here"))
+								.OnTextChanged(this, &SMainWidget::OnXChanged)
+							]
+					]//borderx
 			]
 
-			+ SVerticalBox::Slot()
+			+ SVerticalBox::Slot()//y
 			[
-				SNew(SButton)
-
-				[
-					SNew(STextBlock)
-				]
+					SNew(SBorder).Padding(FMargin(3))
+					.BorderBackgroundColor(FLinearColor::Blue)
+					[
+							SNew(SHorizontalBox)
+							+ SHorizontalBox::Slot()
+							[
+								SNew(STextBlock)
+								.ShadowColorAndOpacity(FLinearColor::Black)
+								.ColorAndOpacity(FLinearColor::Red)
+								.ShadowOffset(FIntPoint(-1, 1))
+								.Font(FSlateFontInfo("Verdana", 34))
+								.Text(FText::FromString(" ENTER coordinate Y "))
+							]
+						+ SHorizontalBox::Slot()
+							[
+								SAssignNew(YInPut, SEditableTextBox)
+								.Text(FText::FromString(""))
+								.Font(FSlateFontInfo("Verdana", 34))
+								.HintText(FText::FromString("Enter coordinate Y Here"))
+								.OnTextChanged(this, &SMainWidget::OnYChanged)
+							]
+					]//bordery
 			]
-			+ SVerticalBox::Slot()
+			+ SVerticalBox::Slot()//z
+			[
+					SNew(SBorder).Padding(FMargin(3))
+					.BorderBackgroundColor(FLinearColor::Blue)
+					[
+							SNew(SHorizontalBox)
+							+ SHorizontalBox::Slot()
+							[
+								SNew(STextBlock)
+								.ShadowColorAndOpacity(FLinearColor::Black)
+								.ColorAndOpacity(FLinearColor::Red)
+								.ShadowOffset(FIntPoint(-1, 1))
+								.Font(FSlateFontInfo("Verdana", 34))
+								.Text(FText::FromString(" ENTER coordinate Z "))
+							]
+						+ SHorizontalBox::Slot()
+							[
+								SAssignNew(ZInPut, SEditableTextBox)
+								.Text(FText::FromString(""))
+								.Font(FSlateFontInfo("Verdana", 34))
+								.HintText(FText::FromString("Enter Z coordinate Here"))
+								.OnTextChanged(this, &SMainWidget::OnZChanged)
+							]
+					]//borderz
+				]
+
+			+ SVerticalBox::Slot()//Vx
 				[
+					SNew(SBorder).Padding(FMargin(3))
+					.BorderBackgroundColor(FLinearColor::Blue)
+					[
+							SNew(SHorizontalBox)
+							+ SHorizontalBox::Slot()
+							[
+									SNew(STextBlock)
+									.ShadowColorAndOpacity(FLinearColor::Black)
+									.ColorAndOpacity(FLinearColor::Red)
+									.ShadowOffset(FIntPoint(-1, 1))
+									.Font(FSlateFontInfo("Verdana", 34))
+									.Text(FText::FromString(" ENTER Vx velocity "))
+							]
+						+ SHorizontalBox::Slot()
+							[
+									SAssignNew(VxInPut, SEditableTextBox)
+									.Text(FText::FromString(""))
+									.Font(FSlateFontInfo("Verdana", 34))
+									.HintText(FText::FromString("Enter Vx velocity Here"))
+									.OnTextChanged(this, &SMainWidget::OnVelocityXChanged)
+							]
+					]//borderVx
+				]
+			+ SVerticalBox::Slot()//Vy
+				[
+						SNew(SBorder).Padding(FMargin(3))
+						.BorderBackgroundColor(FLinearColor::Blue)
+						[
+								SNew(SHorizontalBox)
+								+ SHorizontalBox::Slot()
+								[
+										SNew(STextBlock)
+										.ShadowColorAndOpacity(FLinearColor::Black)
+										.ColorAndOpacity(FLinearColor::Red)
+										.ShadowOffset(FIntPoint(-1, 1))
+										.Font(FSlateFontInfo("Verdana", 34))
+										.Text(FText::FromString(" ENTER Vy velocity "))
+								]
+							+ SHorizontalBox::Slot()
+								[
+										SAssignNew(VyInPut, SEditableTextBox)
+										.Text(FText::FromString(""))
+										.Font(FSlateFontInfo("Verdana", 34))
+										.HintText(FText::FromString("Enter Vy Here"))
+										.OnTextChanged(this, &SMainWidget::OnVelocityYChanged)
+								]
+						]//borderVy
+				]
+
+			+ SVerticalBox::Slot()//Vz
+				[
+						SNew(SBorder).Padding(FMargin(3))
+						.BorderBackgroundColor(FLinearColor::Blue)
+						[
+								SNew(SHorizontalBox)
+								+ SHorizontalBox::Slot()
+								[
+									SNew(STextBlock)
+									.ShadowColorAndOpacity(FLinearColor::Black)
+									.ColorAndOpacity(FLinearColor::Red)
+									.ShadowOffset(FIntPoint(-1, 1))
+									.Font(FSlateFontInfo("Verdana", 34))
+									.Text(FText::FromString(" ENTER Vz Velocity "))
+								]
+							+ SHorizontalBox::Slot()
+								[
+									SAssignNew(VzInPut, SEditableTextBox)
+									.Text(FText::FromString(""))
+									.Font(FSlateFontInfo("Verdana", 34))
+									.HintText(FText::FromString("Enter Velocity z Here"))
+									.OnTextChanged(this, &SMainWidget::OnVelocityZChanged)
+								]
+						]//borderVz
+				]
+			+ SVerticalBox::Slot()//additonal button
+				[
+					
 					SNew(SButton)
 
 					[
 						SNew(STextBlock)
 					]
+					
 				]
-
-			+ SVerticalBox::Slot()
-				[
-					SNew(SButton)
-
-					[
-						SNew(STextBlock)
-					]
-				]
-			+ SVerticalBox::Slot()
-				[
-					SNew(SButton)
-
-					[
-						SNew(STextBlock)
-					]
-				]
-
-			+ SVerticalBox::Slot()
-				[
-					SNew(SButton)
-
-					[
-						SNew(STextBlock)
-					]
-				]
-			+ SVerticalBox::Slot()
-				[
-					SNew(SButton)
-
-					[
-						SNew(STextBlock)
-					]
-				]
-
 			+ SVerticalBox::Slot()
 			[
 					SAssignNew(PlayButton, SButton)

@@ -3,6 +3,7 @@
 #include "OpenSpaceOrSomethingGameModeBase.h"
 
 class SPlanetNumWidget;
+class SMainWidget;
 
 void AOpenSpaceOrSomethingGameModeBase::BeginPlay()
 {
@@ -22,7 +23,7 @@ void AOpenSpaceOrSomethingGameModeBase::BeginPlay()
 	
 	
 }
-
+//MUST ADD ASSERTIONS ,CHECK FOR THE NULL PTRs
 void AOpenSpaceOrSomethingGameModeBase::displayMainMenu(int32 index, SPlanetNumWidget* prevMenu, FString startMes)
 {
 
@@ -37,8 +38,15 @@ void AOpenSpaceOrSomethingGameModeBase::displayMainMenu(int32 index, SPlanetNumW
 	}
 
 	//build the mainmenu widget and display it
-
+	setMessage(startMes);
 	CurrentWidget = SNew(SMainWidget).messageArg(message).ownerArg(this);
+
+	if (GEngine)
+	{
+		GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(CurrentWidget.ToSharedRef()));
+	}
+
+	CurrentWidget->SetVisibility(EVisibility::Visible);
 
 }
 

@@ -78,7 +78,7 @@ void SPlanetNumWidget::OnAddTextChanged(const FText & InText)
 
 FReply SPlanetNumWidget::OnStartClicked()
 {
-	//hardcoded 5
+	//hardcoded 5, change the mesage to format the number of planets
 	parent->displayMainMenu(5, this, "you have this many planets to enter into for");
 	return FReply::Handled();
 }
