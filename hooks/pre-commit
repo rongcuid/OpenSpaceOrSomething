@@ -9,7 +9,7 @@
 
 pushd Source/Physics
 echo "Testing physics..."
-./build.sh
+./test.sh
 if [ $? -ne 0 ]; then
 	echo "Physics test fails"
 	exit 1
