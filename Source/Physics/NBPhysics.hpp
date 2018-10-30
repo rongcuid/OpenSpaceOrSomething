@@ -9,6 +9,8 @@
 
 #include <Eigen/Eigen>
 
+#include <math.h>
+
 #include <boost/numeric/odeint.hpp>
 
 typedef std::vector<Eigen::Vector3d> VectorXs;
@@ -128,3 +130,7 @@ class NBodySimulator
     std::pair<VectorXs, VectorXs> qp;
     std::pair<NBodyCoordinate, NBodyMomentum> _system;
 };
+
+bool massIsValid(double m) { return !isnan(m) && isfinite(m) && m > 0.0; }
+
+bool velocityIsValid(const Eigen::Vector3d& v) { return !v.hasNaN() && v.allFinite();}
