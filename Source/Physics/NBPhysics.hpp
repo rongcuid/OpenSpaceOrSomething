@@ -134,3 +134,5 @@ class NBodySimulator
 bool massIsValid(double m) { return !isnan(m) && isfinite(m) && m > 0.0; }
 
 bool velocityIsValid(const Eigen::Vector3d& v) { return !v.hasNaN() && v.allFinite();}
+
+bool coordinateIsValid(const Eigen::Vector3d& v) { return !v.hasNaN() && v.allFinite();}
