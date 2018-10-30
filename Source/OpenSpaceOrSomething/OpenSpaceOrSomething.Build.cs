@@ -8,9 +8,9 @@ public class OpenSpaceOrSomething : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "CISQLite3" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "CISQLite3" });
 
 		//  using Slate UI for the main menu
 		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
