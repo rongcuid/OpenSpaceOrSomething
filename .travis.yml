@@ -7,8 +7,12 @@ install:
   - sudo apt-get install -qq cppcheck
 
 script:
-  - cd Source/Physics && ./test.sh
-  - cppcheck --error-exitcode=1 .
+  - pushd Source/Physics/tests
+  - sh test.sh
+  - popd
+#  - pushd Source/Physics
+#  - cppcheck --suppress='*:tests/*' --error-exitcode=1 .
+#  - popd
 
 branches:
   only:
