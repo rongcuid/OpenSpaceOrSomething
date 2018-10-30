@@ -17,6 +17,10 @@ class SPlanetNumWidget;
 
 /**
  * AOpenSpaceOrSomethingGameModeBase class for the main game mode
+	indexed the widgets for now:
+	0: gets the number of planets
+	1: main menu
+	2: ingame menu
  */
 UCLASS()
 class OPENSPACEORSOMETHING_API AOpenSpaceOrSomethingGameModeBase : public AGameModeBase
@@ -27,11 +31,13 @@ public:
 	/** Remove the current start widget and add dmain info menu another */
 	void displayMainMenu(int32 count, SPlanetNumWidget* prevWidget, FString outMessage);
 	void setPlanetNum(int32 count);
-	void setMessage(FString mes);
+	void setMessage(FString mes,int32 value);
 
-protected:
-	/** Called when the game starts. */
-	virtual void BeginPlay() override;
+
+
+
+	//redisplay the menu if there were a validation error 
+	void redisplayMenu(FString prompt, int index);
 
 	//start widget is the SPlanetNumWidget to get the number of planets
 	TSharedPtr<SWidget> StartWidget;
@@ -43,7 +49,10 @@ protected:
 
 	FString message;
 
-	
+protected:
+	/** Called when the game starts. */
+	virtual void BeginPlay() override;
+	void displayStartMenu();
 
 	
 };

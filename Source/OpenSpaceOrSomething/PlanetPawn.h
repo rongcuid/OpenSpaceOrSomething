@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "SpacePlayerController.h"
+
 #include "PlanetPawn.generated.h"
 
-class ASpacePlayerController;
+
+/*for cameras? for later*/
 
 UCLASS()
 class OPENSPACEORSOMETHING_API APlanetPawn : public APawn
@@ -17,7 +18,6 @@ class OPENSPACEORSOMETHING_API APlanetPawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	APlanetPawn();
-	void setParent(ASpacePlayerController* owner);
 
 protected:
 	// Called when the game starts or when spawned
@@ -25,12 +25,11 @@ protected:
 
 public:	
 
-	APlayerController* parent;
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	
 	

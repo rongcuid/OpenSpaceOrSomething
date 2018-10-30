@@ -42,8 +42,8 @@ void SPlanetNumWidget::Construct(const FArguments& InArgs)
 						SAssignNew(NumberInPut, SEditableTextBox)
 						.Text(FText::FromString(""))
 						.Font(FSlateFontInfo("Verdana", 34))
-						.HintText(FText::FromString("Enter Number of Planets Here: whole numbers"))
-						.OnTextChanged(this, &SPlanetNumWidget::OnAddTextChanged)
+						.HintText(FText::FromString(" "))
+						//.OnTextChanged(this, &SPlanetNumWidget::OnAddTextChanged)
 					]
 					+ SHorizontalBox::Slot()
 					[
@@ -71,15 +71,49 @@ void SPlanetNumWidget::Construct(const FArguments& InArgs)
 		
 	];//childslot end
 }
-
+/*
 void SPlanetNumWidget::OnAddTextChanged(const FText & InText)
 {
 }
 
+*/
+//TODO: validation !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 FReply SPlanetNumWidget::OnStartClicked()
 {
-	//hardcoded 5, change the mesage to format the number of planets
-	parent->displayMainMenu(5, this, "you have this many planets to enter into for");
+
+	//get the number of planets from the textbox
+	FText out = NumberInPut->GetText();
+	FString temp;
+
+	if (!out.IsEmptyOrWhitespace())
+	{
+		//validate with the c++
+		//convert form a double in c ++ into Fstring in unreal engine
+		// static FString SanitizeFloat( double InFloat );
+
+		//convet from the Fstring into c++ string
+		// std::string test2 = std::string(TCHAR_TO_UTF8(*test));
+
+	   //from std::string into FString
+	   //FString(StringC++.c_str())
+
+		temp = out.ToString();
+
+		int32 num = FCString::Atoi(*temp);
+
+		
+
+
+		//hardcoded 5, change the mesage to format the number of planets
+		parent->displayMainMenu(num, this, "you have this many planets to enter into for ");
+		
+	}
+	else
+	{
+		prompt = TEXT("DO NOT FORGET TO ENTER THE NUMBER ");
+		parent->redisplayMenu(prompt,0);
+	}
+	
 	return FReply::Handled();
 }
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

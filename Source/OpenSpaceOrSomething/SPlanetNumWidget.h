@@ -30,7 +30,8 @@ public:
 
 	//event triggered by change in the text of the textbox
 	//that will get the number of planets and assign to a variable
-	void OnAddTextChanged(const FText& InText);
+	//void OnAddTextChanged(const FText& InText);
+
 
 	FReply OnStartClicked();
 

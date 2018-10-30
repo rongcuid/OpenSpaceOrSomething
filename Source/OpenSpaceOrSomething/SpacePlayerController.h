@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "PlanetPawn.h"
 #include "SpacePlayerController.generated.h"
 
 /**
@@ -17,7 +18,8 @@ class OPENSPACEORSOMETHING_API ASpacePlayerController : public APlayerController
 public:
 	virtual void BeginPlay() override;
 
-	int32 planets_num;
+
+
 	
 	
 	

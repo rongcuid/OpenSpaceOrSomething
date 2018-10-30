@@ -11,10 +11,6 @@ APlanetPawn::APlanetPawn()
 
 }
 
-void APlanetPawn::setParent(ASpacePlayerController * owner)
-{
-	parent = owner;
-}
 
 // Called when the game starts or when spawned
 void APlanetPawn::BeginPlay()
@@ -29,6 +25,7 @@ void APlanetPawn::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+/*
 
 // Called to bind functionality to input
 void APlanetPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -37,3 +34,4 @@ void APlanetPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 }
 
+*/
