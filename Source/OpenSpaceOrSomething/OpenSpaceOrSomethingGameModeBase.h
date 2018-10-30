@@ -15,7 +15,6 @@ UCLASS()
 class OPENSPACEORSOMETHING_API AOpenSpaceOrSomethingGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-		
 public:
 	/** Remove the current menu widget and add another */
 	void ChangeWidget(SMainWidget NewWidgetClass);
