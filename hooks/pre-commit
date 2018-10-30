@@ -7,7 +7,7 @@
 #
 # To enable this hook, rename this file to "pre-commit".
 
-pushd Source/Physics
+pushd Source/Physics/tests
 echo "Testing physics..."
 ./test.sh
 if [ $? -ne 0 ]; then
