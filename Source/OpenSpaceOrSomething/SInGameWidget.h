@@ -36,7 +36,7 @@ public:
 	FReply OnPlayClicked();
 	FReply OnExitClicked();
 
-	TSharedPtr<SButton> AddNextButton;
+	TSharedPtr<SButton> AddMoreButton;
 	TSharedPtr<SButton> PlayButton;
 	TSharedPtr<SButton> ExitButton;
 
