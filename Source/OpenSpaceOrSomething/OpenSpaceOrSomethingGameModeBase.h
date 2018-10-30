@@ -5,8 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "SMainWidget.h"
+#include "SPlanetNumWidget.h"
+#include "DataStruct.h"
+#include "SlateBasics.h"
+#include "Runtime/Engine/Classes/Engine/Engine.h"
+#include "Widgets/SWeakWidget.h"
 #include "OpenSpaceOrSomethingGameModeBase.generated.h"
 
+class SPlanetNumWidget;
 
 /**
  * AOpenSpaceOrSomethingGameModeBase class for the main game mode
@@ -17,21 +23,23 @@ class OPENSPACEORSOMETHING_API AOpenSpaceOrSomethingGameModeBase : public AGameM
 	GENERATED_BODY()
 		
 public:
-	/** Remove the current menu widget and add another */
-	void ChangeWidget(SMainWidget NewWidgetClass);
+	/** Remove the current start widget and add dmain info menu another */
+	void displayMainMenu(int32 count, SPlanetNumWidget* prevWidget);
+	void setPlanetNum(int32 count);
 
 protected:
 	/** Called when the game starts. */
 	virtual void BeginPlay() override;
 
-	/** The widget class we will use as our menu when the game starts. */
-	SMainWidget MainWidget;
+	//start widget is the SPlanetNumWidget to get the number of planets
+	TSharedPtr<SWidget> StartWidget;
 
 	/** The widget instance that will behave as temp variable */
-	SMainWidget* CurrentWidget;
-	TArray<FText> data;
-	
-	
-	
+	TSharedPtr<SWidget> CurrentWidget;
+
+	int32 planets_num;
+
+	FString message;
+
 	
 };

@@ -2,17 +2,45 @@
 
 #include "OpenSpaceOrSomethingGameModeBase.h"
 
+class SPlanetNumWidget;
 
 void AOpenSpaceOrSomethingGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
-	//ChangeWidget(MainWidget);
+	planets_num = -1;
+	message = TEXT("HELLO");
+
+	StartWidget = SNew(SPlanetNumWidget).messageArg(message).ownerArg(this);
+
+	if (GEngine)
+	{
+		GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(StartWidget.ToSharedRef()));
+	}
+
+	StartWidget->SetVisibility(EVisibility::Visible);
+
+	
+	
 }
 
-void AOpenSpaceOrSomethingGameModeBase::ChangeWidget(SMainWidget NewWidgetClass)
+void AOpenSpaceOrSomethingGameModeBase::displayMainMenu(int32 index, SPlanetNumWidget* prevMenu)
 {
-	//if current widget is not empty
-	//remove it from the view port
-	//if the new widget is not empty
-	//add the widget to the viewport
+
+	//widget is not visible and does not take space
+	prevMenu->SetVisibility(EVisibility::Collapsed);
+	
+	
+
+	setPlanetNum(index);
+
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("will be moving to the main"));
+	}
 }
+
+void AOpenSpaceOrSomethingGameModeBase::setPlanetNum(int32 count)
+{
+	planets_num = count;
+}
+

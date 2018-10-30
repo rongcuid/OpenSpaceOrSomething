@@ -7,7 +7,7 @@
 #include "Widgets/SCompoundWidget.h"
 
 /**
- * 
+ * main menu widget 
  */
 class OPENSPACEORSOMETHING_API SMainWidget : public SCompoundWidget
 {
