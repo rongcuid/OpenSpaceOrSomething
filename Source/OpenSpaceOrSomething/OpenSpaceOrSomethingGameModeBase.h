@@ -24,8 +24,9 @@ class OPENSPACEORSOMETHING_API AOpenSpaceOrSomethingGameModeBase : public AGameM
 		
 public:
 	/** Remove the current start widget and add dmain info menu another */
-	void displayMainMenu(int32 count, SPlanetNumWidget* prevWidget);
+	void displayMainMenu(int32 count, SPlanetNumWidget* prevWidget, FString outMessage);
 	void setPlanetNum(int32 count);
+	void setMessage(FString mes);
 
 protected:
 	/** Called when the game starts. */

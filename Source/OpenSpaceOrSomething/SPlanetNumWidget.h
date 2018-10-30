@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Widgets/SCompoundWidget.h"
 #include "SlateBasics.h"
-#include "DataStruct.h"
 #include "OpenSpaceOrSomethingGameModeBase.h"
 
 class AOpenSpaceOrSomethingGameModeBase;
@@ -35,7 +34,6 @@ public:
 
 	FReply OnStartClicked();
 
-	//FString widget_name;
 
 	TSharedPtr<SButton> NUMButton;
 	TSharedPtr<SEditableTextBox> NumberInPut;

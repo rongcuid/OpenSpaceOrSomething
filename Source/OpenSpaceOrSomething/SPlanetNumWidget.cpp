@@ -11,7 +11,6 @@ void SPlanetNumWidget::Construct(const FArguments& InArgs)
 	prompt = InArgs._messageArg;
 	parent = InArgs._ownerArg;///gamemode pointer
 
-	//widget_temp = TEXT("");
 
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)
 	[
@@ -79,7 +78,8 @@ void SPlanetNumWidget::OnAddTextChanged(const FText & InText)
 
 FReply SPlanetNumWidget::OnStartClicked()
 {
-	parent->displayMainMenu(5, this);
+	//hardcoded 5
+	parent->displayMainMenu(5, this, "you have this many planets to enter into for");
 	return FReply::Handled();
 }
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

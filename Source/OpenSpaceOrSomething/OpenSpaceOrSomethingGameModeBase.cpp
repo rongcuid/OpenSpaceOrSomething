@@ -23,24 +23,32 @@ void AOpenSpaceOrSomethingGameModeBase::BeginPlay()
 	
 }
 
-void AOpenSpaceOrSomethingGameModeBase::displayMainMenu(int32 index, SPlanetNumWidget* prevMenu)
+void AOpenSpaceOrSomethingGameModeBase::displayMainMenu(int32 index, SPlanetNumWidget* prevMenu, FString startMes)
 {
 
 	//widget is not visible and does not take space
 	prevMenu->SetVisibility(EVisibility::Collapsed);
 	
-	
-
 	setPlanetNum(index);
 
 	if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("will be moving to the main"));
 	}
+
+	//build the mainmenu widget and display it
+
+	CurrentWidget = SNew(SMainWidget).messageArg(message).ownerArg(this);
+
 }
 
 void AOpenSpaceOrSomethingGameModeBase::setPlanetNum(int32 count)
 {
 	planets_num = count;
+}
+
+void AOpenSpaceOrSomethingGameModeBase::setMessage(FString mes)
+{
+	message = mes;
 }
 
