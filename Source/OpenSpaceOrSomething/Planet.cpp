@@ -7,8 +7,9 @@
 // Sets default values
 APlanet::APlanet()
 {
+	//this->SetActorHiddenInGame(false);
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 	
 	SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
 	SphereComponent->InitSphereRadius(40.0f);
@@ -18,13 +19,14 @@ APlanet::APlanet()
 	Mesh_Shape->SetupAttachment(RootComponent);
 
 	auto MeshAsset =
-		ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Cube.Cube'"));
+		ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
 
 	if (MeshAsset.Object != nullptr)
 	{
 		Mesh_Shape->SetStaticMesh(MeshAsset.Object);
 		Mesh_Shape->SetRelativeLocation(FVector(0.0f, 0.0f, -40.0f));
 		Mesh_Shape->SetWorldScale3D(FVector(0.8f));
+		//Mesh_Shape->SetVisibility(true, false);//shape is vissible but its children not
 	}
 
 	
@@ -42,6 +44,10 @@ void APlanet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void APlanet::updatePlanet()
+{
 }
 
 AActor * APlanet::getPlanetPtr()

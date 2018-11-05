@@ -34,6 +34,11 @@ void AOpenSpaceOrSomethingGameModeBase::displayStartMenu()
 
 }
 
+void AOpenSpaceOrSomethingGameModeBase::renderPlanets()
+{
+	spawnPlanets(planets_num);
+}
+
 //MUST ADD ASSERTIONS ,CHECK FOR THE NULL PTRs
 void AOpenSpaceOrSomethingGameModeBase::displayMainMenu(int32 redisplay_count)
 {
@@ -82,11 +87,14 @@ void AOpenSpaceOrSomethingGameModeBase::instantiateData(int32 index)
 
 void AOpenSpaceOrSomethingGameModeBase::spawnPlanets(int32 num)
 {
+	
 	for (int32 i = 0; i < num; i++)
 	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("inside the methods loop spawning"));
 		if (GetWorld())
 		{
-			planet_ptr.Add( GetWorld()->SpawnActor<APlanet>(APlanet::StaticClass()));
+			planet_ptr.Add( GetWorld()->SpawnActor<APlanet>(APlanet::StaticClass(), FVector::ZeroVector, FRotator::ZeroRotator));
+
 		}
 
 	}

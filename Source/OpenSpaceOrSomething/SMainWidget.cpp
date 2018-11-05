@@ -370,9 +370,14 @@ FReply SMainWidget::OnAddClicked()
 	//redisplay the menu for the next data collection
 	return FReply::Handled();
 }
+
+//render info button
 FReply SMainWidget::OnPlayClicked()
 {
-
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("clicked to render the planets button"));
+	this->SetVisibility(EVisibility::Collapsed);
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("after the render method"));
+	parent->renderPlanets();
 	return FReply::Handled();
 }
 

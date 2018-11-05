@@ -37,6 +37,8 @@ public:
 	virtual void BeginPlay() override;
 	void displayStartMenu();
 
+	void renderPlanets();
+
 	//will instantiate the planets with the location in origin(0,0,0)
 	void spawnPlanets(int32 num);
 
