@@ -12,6 +12,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 {
 	prompt = InArgs._messageArg;
 	parent = InArgs._ownerArg;///gamemode pointer
+	redisplay_count = InArgs._countArg;
 
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)
 	[
@@ -47,7 +48,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 								.Text(FText::FromString(""))
 								.Font(FSlateFontInfo("Verdana", 34))
 								.HintText(FText::FromString("Enter Mass Value Here"))
-								.OnTextChanged(this, &SMainWidget::OnMassChanged)
+								//.OnTextChanged(this, &SMainWidget::OnMassChanged)
 							]
 		            ]//border mass
 			]//vertical 2
@@ -72,7 +73,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 								.Text(FText::FromString(""))
 								.Font(FSlateFontInfo("Verdana", 34))
 								.HintText(FText::FromString("Enter coordinate X Here"))
-								.OnTextChanged(this, &SMainWidget::OnXChanged)
+								//.OnTextChanged(this, &SMainWidget::OnXChanged)
 							]
 					]//borderx
 			]
@@ -98,7 +99,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 								.Text(FText::FromString(""))
 								.Font(FSlateFontInfo("Verdana", 34))
 								.HintText(FText::FromString("Enter coordinate Y Here"))
-								.OnTextChanged(this, &SMainWidget::OnYChanged)
+								//.OnTextChanged(this, &SMainWidget::OnYChanged)
 							]
 					]//bordery
 			]
@@ -123,7 +124,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 								.Text(FText::FromString(""))
 								.Font(FSlateFontInfo("Verdana", 34))
 								.HintText(FText::FromString("Enter Z coordinate Here"))
-								.OnTextChanged(this, &SMainWidget::OnZChanged)
+								//.OnTextChanged(this, &SMainWidget::OnZChanged)
 							]
 					]//borderz
 				]
@@ -149,7 +150,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 									.Text(FText::FromString(""))
 									.Font(FSlateFontInfo("Verdana", 34))
 									.HintText(FText::FromString("Enter Vx velocity Here"))
-									.OnTextChanged(this, &SMainWidget::OnVelocityXChanged)
+									//.OnTextChanged(this, &SMainWidget::OnVelocityXChanged)
 							]
 					]//borderVx
 				]
@@ -174,7 +175,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 										.Text(FText::FromString(""))
 										.Font(FSlateFontInfo("Verdana", 34))
 										.HintText(FText::FromString("Enter Vy Here"))
-										.OnTextChanged(this, &SMainWidget::OnVelocityYChanged)
+										//.OnTextChanged(this, &SMainWidget::OnVelocityYChanged)
 								]
 						]//borderVy
 				]
@@ -200,7 +201,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 									.Text(FText::FromString(""))
 									.Font(FSlateFontInfo("Verdana", 34))
 									.HintText(FText::FromString("Enter Velocity z Here"))
-									.OnTextChanged(this, &SMainWidget::OnVelocityZChanged)
+									//.OnTextChanged(this, &SMainWidget::OnVelocityZChanged)
 								]
 						]//borderVz
 				]
@@ -248,7 +249,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 							.ColorAndOpacity(FLinearColor::Red)
 							.ShadowOffset(FIntPoint(-1, 1))
 							.Font(FSlateFontInfo("Verdana", 34))
-							.Text(FText::FromString("ADD NEXT PLANET"))
+							.Text(FText::FromString(("ADD "+ FString::FromInt(redisplay_count)+ " PLANETs")))
 						]
 					]
 			]
@@ -256,6 +257,8 @@ void SMainWidget::Construct(const FArguments& InArgs)
 		];
 
 }
+
+/*
 void SMainWidget::OnMassChanged(const FText & InText)
 {
 
@@ -308,14 +311,72 @@ void SMainWidget::OnVelocityZChanged(const FText & InText)
 {
 
 }
+
+*/
+
+//validate and add the information into the planets_data
+//redisplay the menu 
 FReply SMainWidget::OnAddClicked()
 {
+	TArray<FPlanetStruct>* dataArray = parent->getDataPtr();
+	int32 index = redisplay_count - 1;
+
+	//validate the data
+	//spawn an actor from the gamemode if data is ok
+	//get the data from the textboxes
+	FString temp = MassInPut->GetText().ToString();
+	dataArray->GetData()[index].data[0] = FCString::Atof(*temp);
+
+	FString TheFloatStr = FString::SanitizeFloat(dataArray->GetData()[index].data[0]);
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, *TheFloatStr);
+	}
+
+
+	temp = XInPut->GetText().ToString();
+	float x = FCString::Atof(*temp);
+	dataArray->GetData()[index].data[1] = FCString::Atof(*temp);
+
+	temp = YInPut->GetText().ToString();
+	float y = FCString::Atof(*temp);
+	dataArray->GetData()[index].data[2] = FCString::Atof(*temp);
+
+	temp = ZInPut->GetText().ToString();
+	float z = FCString::Atof(*temp);
+	dataArray->GetData()[index].data[3] = FCString::Atof(*temp);
+
+	temp = VxInPut->GetText().ToString();
+	float Vx = FCString::Atof(*temp);
+	dataArray->GetData()[index].data[4] = FCString::Atof(*temp);
+
+	temp = VyInPut->GetText().ToString();
+	float Vy = FCString::Atof(*temp);
+	dataArray->GetData()[index].data[5] = FCString::Atof(*temp);
+
+	temp = VzInPut->GetText().ToString();
+	float Vz = FCString::Atof(*temp);
+	dataArray->GetData()[index].data[6] = FCString::Atof(*temp);
+	
+	if ((redisplay_count - 1) != 0)
+	{
+		parent->displayMainMenu(redisplay_count-1);
+	}
+	//if it is zero and the button pressed-> display only error message????
+
+	
+
+	
+	//redisplay the menu for the next data collection
 	return FReply::Handled();
 }
 FReply SMainWidget::OnPlayClicked()
 {
+
 	return FReply::Handled();
 }
+
+
 FReply SMainWidget::OnMoreClicked()
 {
 	return FReply::Handled();

@@ -8,6 +8,7 @@
 
 /**
  * struct to keep the data for the tables in the database
+ 
  */
 
 USTRUCT(BlueprintType)
@@ -66,6 +67,26 @@ public:
 		Fields.Emplace(TEXT("Vz"));
 		Fields.Emplace(TEXT("project_name"));
 	}
+
+
+};
+
+
+USTRUCT(BlueprintType)
+struct FPlanetStruct
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Analytics")
+		TArray<float> data;
+
+
+	FPlanetStruct() 
+	{
+		data.Init(0, 7);
+	}
+
 
 
 };

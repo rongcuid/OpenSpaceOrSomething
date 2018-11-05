@@ -4,7 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Runtime/Core/Public/Math/TransformNonVectorized.h"
+#include "Runtime/Engine/Classes/Components/SphereComponent.h"
+#include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Planet.generated.h"
+
+/*Planet class */
 
 UCLASS()
 class OPENSPACEORSOMETHING_API APlanet : public AActor
@@ -22,6 +27,23 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	AActor* getPlanetPtr();
+	FTransform SpawnLocation;
+
+	//the main component that will allow the rotation
+	//scaling and location of the class
+	//the rest of components will be attached to it
+	//reaction to physics
+	UPROPERTY()
+		USphereComponent* SphereComponent;
+
+	//sphere shape for a planet
+	//static mesh component for visual rendering
+	UPROPERTY()
+	UStaticMeshComponent* Mesh_Shape;
+
+	
 
 	
 	

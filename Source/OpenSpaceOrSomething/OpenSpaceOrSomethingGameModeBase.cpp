@@ -11,7 +11,7 @@ void AOpenSpaceOrSomethingGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
 	planets_num = -1;
-	message = TEXT("HELLO");
+	message = TEXT("Welcome to the Game");
 
 
 	//set the ASpaceController class as a default player controller class for this gamemode
@@ -19,10 +19,8 @@ void AOpenSpaceOrSomethingGameModeBase::BeginPlay()
 	
 	displayStartMenu();
 	
-
-	
-	
 }
+
 
 void AOpenSpaceOrSomethingGameModeBase::displayStartMenu()
 {
@@ -36,25 +34,9 @@ void AOpenSpaceOrSomethingGameModeBase::displayStartMenu()
 
 }
 
-
-void AOpenSpaceOrSomethingGameModeBase::redisplayMenu(FString prompt, int which)
-{
-	if(which == 0)
-	{ 
-		setMessage(prompt, -1);
-		displayStartMenu();
-	}
-	
-}
-
 //MUST ADD ASSERTIONS ,CHECK FOR THE NULL PTRs
-void AOpenSpaceOrSomethingGameModeBase::displayMainMenu(int32 index, SPlanetNumWidget* prevMenu, FString startMes)
+void AOpenSpaceOrSomethingGameModeBase::displayMainMenu(int32 redisplay_count)
 {
-
-	//widget is not visible and does not take space
-	prevMenu->SetVisibility(EVisibility::Collapsed);
-	
-	setPlanetNum(index);
 
 	if (GEngine)
 	{
@@ -62,8 +44,7 @@ void AOpenSpaceOrSomethingGameModeBase::displayMainMenu(int32 index, SPlanetNumW
 	}
 
 	//build the mainmenu widget and display it
-	setMessage(startMes, index);
-	CurrentWidget = SNew(SMainWidget).messageArg(message).ownerArg(this);
+	CurrentWidget = SNew(SMainWidget).messageArg(message).ownerArg(this).countArg(redisplay_count);
 
 	if (GEngine)
 	{
@@ -71,22 +52,44 @@ void AOpenSpaceOrSomethingGameModeBase::displayMainMenu(int32 index, SPlanetNumW
 	}
 
 	CurrentWidget->SetVisibility(EVisibility::Visible);
-
+	
 }
 
 void AOpenSpaceOrSomethingGameModeBase::setPlanetNum(int32 count)
 {
 	planets_num = count;
+	instantiateData(count);
 }
 
-void AOpenSpaceOrSomethingGameModeBase::setMessage(FString mes, int32 val)
+void AOpenSpaceOrSomethingGameModeBase::setMessage(FString mes)
 {
-	FString add = FString(TEXT(" "));
+	message = mes;
+}
 
-	if (val != -1)
+TArray<FPlanetStruct>* AOpenSpaceOrSomethingGameModeBase::getDataPtr()
+{
+	return &planets_data;
+}
+
+void AOpenSpaceOrSomethingGameModeBase::instantiateData(int32 index)
+{
+	
+	for (int32 i = 0; i < index; i++)
 	{
-		add = FString::FromInt(val);
+		planets_data.Add(FPlanetStruct());
 	}
-	message = mes + add;
+}
+
+void AOpenSpaceOrSomethingGameModeBase::spawnPlanets(int32 num)
+{
+	for (int32 i = 0; i < num; i++)
+	{
+		if (GetWorld())
+		{
+			planet_ptr.Add( GetWorld()->SpawnActor<APlanet>(APlanet::StaticClass()));
+		}
+
+	}
+	
 }
 

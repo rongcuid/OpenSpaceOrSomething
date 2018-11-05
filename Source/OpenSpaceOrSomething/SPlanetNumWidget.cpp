@@ -98,20 +98,24 @@ FReply SPlanetNumWidget::OnStartClicked()
 	   //FString(StringC++.c_str())
 
 		temp = out.ToString();
+		FString new_prompt = FString(TEXT("You have to enter info for ")) + temp + FString(TEXT(" planets"));
 
 		int32 num = FCString::Atoi(*temp);
-
+		parent->setPlanetNum(num);
 		
-
-
-		//hardcoded 5, change the mesage to format the number of planets
-		parent->displayMainMenu(num, this, "you have this many planets to enter into for ");
+		//take this menu off the scree and display main menu
+		this->SetVisibility(EVisibility::Collapsed);
+		
+		parent->setMessage(new_prompt);
+		parent->displayMainMenu(num);
 		
 	}
 	else
 	{
 		prompt = TEXT("DO NOT FORGET TO ENTER THE NUMBER ");
-		parent->redisplayMenu(prompt,0);
+		parent->setMessage(prompt);
+		this->SetVisibility(EVisibility::Collapsed);
+		parent->displayStartMenu();
 	}
 	
 	return FReply::Handled();

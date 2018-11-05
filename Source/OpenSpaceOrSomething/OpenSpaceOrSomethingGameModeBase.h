@@ -11,16 +11,14 @@
 #include "Runtime/Engine/Classes/Engine/Engine.h"
 #include "Widgets/SWeakWidget.h"
 #include "SpacePlayerController.h"
+#include "Planet.h"
+#include "Runtime/Core/Public/Math/TransformNonVectorized.h"
 #include "OpenSpaceOrSomethingGameModeBase.generated.h"
 
 class SPlanetNumWidget;
 
 /**
  * AOpenSpaceOrSomethingGameModeBase class for the main game mode
-	indexed the widgets for now:
-	0: gets the number of planets
-	1: main menu
-	2: ingame menu
  */
 UCLASS()
 class OPENSPACEORSOMETHING_API AOpenSpaceOrSomethingGameModeBase : public AGameModeBase
@@ -29,15 +27,18 @@ class OPENSPACEORSOMETHING_API AOpenSpaceOrSomethingGameModeBase : public AGameM
 		
 public:
 	/** Remove the current start widget and add dmain info menu another */
-	void displayMainMenu(int32 count, SPlanetNumWidget* prevWidget, FString outMessage);
+	void displayMainMenu(int32 count);
 	void setPlanetNum(int32 count);
-	void setMessage(FString mes,int32 value);
+	void setMessage(FString mes);
+	TArray<FPlanetStruct>* getDataPtr();
+	void instantiateData(int32 index);
 
+	/** Called when the game starts. */
+	virtual void BeginPlay() override;
+	void displayStartMenu();
 
-
-
-	//redisplay the menu if there were a validation error 
-	void redisplayMenu(FString prompt, int index);
+	//will instantiate the planets with the location in origin(0,0,0)
+	void spawnPlanets(int32 num);
 
 	//start widget is the SPlanetNumWidget to get the number of planets
 	TSharedPtr<SWidget> StartWidget;
@@ -46,13 +47,9 @@ public:
 	TSharedPtr<SWidget> CurrentWidget;
 
 	int32 planets_num;
-
 	FString message;
-
-protected:
-	/** Called when the game starts. */
-	virtual void BeginPlay() override;
-	void displayStartMenu();
+	TArray<FPlanetStruct> planets_data;
+	TArray<APlanet*> planet_ptr;
 
 	
 };

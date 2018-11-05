@@ -23,12 +23,15 @@ public:
 	//give the pointer to parent
 	SLATE_ARGUMENT(AOpenSpaceOrSomethingGameModeBase*, ownerArg);
 
+	//for the countdown for the number of plannet left to add 
+	SLATE_ARGUMENT(int32, countArg);
+
 	SLATE_END_ARGS()
 
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
 
-	//the data's messages
+	/*
 	void OnMassChanged(const FText& InText);
 	void OnXChanged(const FText& InText);
 	void OnYChanged(const FText& InText);
@@ -36,6 +39,7 @@ public:
 	void OnVelocityXChanged(const FText& InText);
 	void OnVelocityYChanged(const FText& InText);
 	void OnVelocityZChanged(const FText& InText);
+	*/
 
 	FReply OnAddClicked();
 	FReply OnPlayClicked();
@@ -55,6 +59,9 @@ public:
 	TSharedPtr<SEditableTextBox> VyInPut;
 	TSharedPtr<SEditableTextBox> VzInPut;
 
+	
+
 	FString prompt;
 	AOpenSpaceOrSomethingGameModeBase* parent;
+	int32 redisplay_count;
 };
