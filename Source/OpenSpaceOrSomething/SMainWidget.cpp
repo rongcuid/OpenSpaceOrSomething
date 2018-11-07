@@ -27,7 +27,7 @@ void SMainWidget::Construct(const FArguments& InArgs)
 				.Text(FText::FromString(prompt))//change to empty later to start with
 			]
 			+ SVerticalBox::Slot()//mass
-			.Padding(FMargin(520.0f, 20.0f, 520.0f, 50.0f))
+			//.Padding(FMargin(520.0f, 20.0f, 520.0f, 50.0f))
 			[
 					SNew(SBorder).Padding(FMargin(3))
 					.BorderBackgroundColor(FLinearColor::Blue)
@@ -208,10 +208,21 @@ void SMainWidget::Construct(const FArguments& InArgs)
 			+ SVerticalBox::Slot()//additonal button
 				[
 					
-					SNew(SButton)
-
+					SAssignNew(SaveButton, SButton)
+					.ButtonStyle(FCoreStyle::Get(), "NoBorder")
+					.HAlign(HAlign_Center).VAlign(VAlign_Center)
+					.OnClicked(this, &SMainWidget::OnSaveClicked)
 					[
-						SNew(STextBlock)
+							SNew(SBorder).Padding(FMargin(3))
+							.BorderBackgroundColor(FLinearColor::Blue)
+							[
+								SNew(STextBlock)
+								.ShadowColorAndOpacity(FLinearColor::Black)
+								.ColorAndOpacity(FLinearColor::Red)
+								.ShadowOffset(FIntPoint(-1, 1))
+								.Font(FSlateFontInfo("Verdana", 34))
+								.Text(FText::FromString("SAVE INFO"))
+							]
 					]
 					
 				]
@@ -362,7 +373,7 @@ FReply SMainWidget::OnAddClicked()
 	{
 		parent->displayMainMenu(redisplay_count-1);
 	}
-	//if it is zero and the button pressed-> display only error message????
+	
 
 	
 
@@ -381,9 +392,11 @@ FReply SMainWidget::OnPlayClicked()
 	return FReply::Handled();
 }
 
-
-FReply SMainWidget::OnMoreClicked()
+//save the infomaion to the db
+FReply SMainWidget::OnSaveClicked()
 {
+	FString result = parent->saveToDB();
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, *result);
 	return FReply::Handled();
 }
 

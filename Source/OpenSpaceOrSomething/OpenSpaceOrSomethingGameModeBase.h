@@ -13,6 +13,10 @@
 #include "SpacePlayerController.h"
 #include "Planet.h"
 #include "Runtime/Core/Public/Math/TransformNonVectorized.h"
+#include "DBWrapper.h"
+#include "Runtime/Core/Public/Misc/Paths.h"
+#include  "Runtime/Core/Public/Misc/DateTime.h"
+#include "Runtime/Core/Public/Misc/DateTime.h"
 #include "OpenSpaceOrSomethingGameModeBase.generated.h"
 
 class SPlanetNumWidget;
@@ -32,10 +36,13 @@ public:
 	void setMessage(FString mes);
 	TArray<FPlanetStruct>* getDataPtr();
 	void instantiateData(int32 index);
+	FString saveToDB();
 
 	/** Called when the game starts. */
 	virtual void BeginPlay() override;
 	void displayStartMenu();
+
+	FString getTIMESTAMP();
 
 	void renderPlanets();
 
@@ -52,6 +59,15 @@ public:
 	FString message;
 	TArray<FPlanetStruct> planets_data;
 	TArray<APlanet*> planet_ptr;
+
+	//FDateTime curDateTime = FDateTime::Now();
+
+	const FString DB_Name = "Planets.db";
+	FString Table_Name;
+
+	//full path to the Saved Folder in the project directory
+	FString databaseFile;
+	
 
 	
 };

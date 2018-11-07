@@ -43,11 +43,11 @@ public:
 
 	FReply OnAddClicked();
 	FReply OnPlayClicked();
-	FReply OnMoreClicked();
+	FReply OnSaveClicked();
 
 	TSharedPtr<SButton> AddNextButton;
 	TSharedPtr<SButton> PlayButton;
-	TSharedPtr<SButton> MoreButton;
+	TSharedPtr<SButton> SaveButton;
 
 	TSharedPtr<SEditableTextBox> MassInPut;
 

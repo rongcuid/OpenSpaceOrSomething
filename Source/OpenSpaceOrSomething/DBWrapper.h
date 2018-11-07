@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "SQLiteDatabase.h"
+#include "SQLiteDatabaseStructs.h"
 
 #include "DBWrapper.generated.h"
 
@@ -17,9 +18,21 @@ class OPENSPACEORSOMETHING_API UDBWrapper : public UObject
 	GENERATED_BODY()
 
 public:
-	void set_DB(FString db_name);
-	FString DB_Name;
 	
-	
+	bool prepare_DB(FString db_filepath);
+	bool register_DB(FString db_filepath, FString db_name);
+	bool prepare_Table(FString db_name, FString table_name, const FString& Query);
+
+	bool insert_intoDB(FString db_name, const FString& Query);
+	void updateDB();
+	void delete_fromDB();
+
+	void readyDBFields();
+	void populateFSQLiteTableField();
+
+	TArray<FString> db_fields;
+	TArray< FSQLiteTableField> table_data;
+	FString table_name;
+	FString db_name;
 	
 };
