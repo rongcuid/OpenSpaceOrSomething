@@ -11,8 +11,15 @@
 			"AdditionalDependencies": [
 				"Engine",
 				"Slate",
-				"SlateCore"
+				"SlateCore",
+				"CoreUObject"
 			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "CISQLite3",
+			"Enabled": true
 		}
 	]
 }

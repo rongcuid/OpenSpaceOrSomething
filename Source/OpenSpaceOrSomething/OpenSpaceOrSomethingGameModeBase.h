@@ -5,8 +5,21 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "SMainWidget.h"
+#include "SPlanetNumWidget.h"
+#include "DataStruct.h"
+#include "SlateBasics.h"
+#include "Runtime/Engine/Classes/Engine/Engine.h"
+#include "Widgets/SWeakWidget.h"
+#include "SpacePlayerController.h"
+#include "Planet.h"
+#include "Runtime/Core/Public/Math/TransformNonVectorized.h"
+#include "DBWrapper.h"
+#include "Runtime/Core/Public/Misc/Paths.h"
+#include  "Runtime/Core/Public/Misc/DateTime.h"
+#include "Runtime/Core/Public/Misc/DateTime.h"
 #include "OpenSpaceOrSomethingGameModeBase.generated.h"
 
+class SPlanetNumWidget;
 
 /**
  * AOpenSpaceOrSomethingGameModeBase class for the main game mode
@@ -16,21 +29,44 @@ class OPENSPACEORSOMETHING_API AOpenSpaceOrSomethingGameModeBase : public AGameM
 {
 	GENERATED_BODY()
 public:
-	/** Remove the current menu widget and add another */
-	void ChangeWidget(SMainWidget NewWidgetClass);
+	/** Remove the current start widget and add dmain info menu another */
+	void displayMainMenu(int32 count);
+	void setPlanetNum(int32 count);
+	void setMessage(FString mes);
+	TArray<FPlanetStruct>* getDataPtr();
+	void instantiateData(int32 index);
+	FString saveToDB();
 
-protected:
 	/** Called when the game starts. */
 	virtual void BeginPlay() override;
+	void displayStartMenu();
 
-	/** The widget class we will use as our menu when the game starts. */
-	SMainWidget MainWidget;
+	FString getTIMESTAMP();
+
+	void renderPlanets();
+
+	//will instantiate the planets with the location in origin(0,0,0)
+	void spawnPlanets(int32 num);
+
+	//start widget is the SPlanetNumWidget to get the number of planets
+	TSharedPtr<SWidget> StartWidget;
 
 	/** The widget instance that will behave as temp variable */
-	SMainWidget* CurrentWidget;
-	TArray<FText> data;
+	TSharedPtr<SWidget> CurrentWidget;
+
+	int32 planets_num;
+	FString message;
+	TArray<FPlanetStruct> planets_data;
+	TArray<APlanet*> planet_ptr;
+
+	//FDateTime curDateTime = FDateTime::Now();
+
+	const FString DB_Name = "Planets.db";
+	FString Table_Name;
+
+	//full path to the Saved Folder in the project directory
+	FString databaseFile;
 	
-	
-	
+
 	
 };
