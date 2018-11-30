@@ -8,7 +8,7 @@ install:
 
 script:
   - pushd Source/Physics/tests
-  - sh test.sh
+  - bash test.sh
   - popd
 #  - pushd Source/Physics
 #  - cppcheck --suppress='*:tests/*' --error-exitcode=1 .
