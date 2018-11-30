@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+set -Eeuxo pipefail
+
 INCDIR=
 INCDIR+="-I../../../ThirdParty/boost_1_68_0 "
 INCDIR+="-I../../../ThirdParty/eigen "
